@@ -12,9 +12,7 @@ public class PlayWithComparators {
         Person james = new Person("James", 32);
         Person james2 = new Person("James", 26);
 
-        Function<Person, String> getName = Person::getName;
-
-        Comparator<Person> cmpName = Comparator.comparing(getName);
+        Comparator<Person> cmpName = Comparator.comparing(Person::getName);
         Comparator<Person> cmpNameReversed = cmpName.reversed();
 
         System.out.println("Mary > John : " + (cmpName.compare(mary, john) > 0));
@@ -29,8 +27,7 @@ public class PlayWithComparators {
 
         System.out.println();
 
-        Function<Person, Integer> getAge = Person::getAge;
-        Comparator<Person> cmpAge = Comparator.comparing(getAge);
+        Comparator<Person> cmpAge = Comparator.comparing(Person::getAge);
         Comparator<Person> cmpAgeReversed = cmpAge.reversed();
 
         System.out.println("Mary " + mary.getAge() + " > John " + john.getAge() + " : " + (cmpAge.compare(mary, john) > 0));
@@ -44,8 +41,9 @@ public class PlayWithComparators {
         System.out.println("Linda " + linda.getAge() + " > John " + john.getAge() + " : " + (cmpAgeReversed.compare(linda, john) > 0));
 
         System.out.println();
-        
-        Comparator<Person> cmp = cmpName.thenComparing(cmpAge);
+
+        Comparator<Person> cmp = Comparator.comparing(Person::getName)
+                                           .thenComparing(Person::getAge);
 
         System.out.println("Mary " + mary.getAge() + " > John " + john.getAge() + " : " + (cmp.compare(mary, john) > 0));
         System.out.println("John " + john.getAge() + " > James " + james.getAge() + " : " + (cmp.compare(john, james) > 0));

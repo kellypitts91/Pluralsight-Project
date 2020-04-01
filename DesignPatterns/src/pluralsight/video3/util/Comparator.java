@@ -21,15 +21,17 @@ public interface Comparator<T> {
     default Comparator<T> reversed() {
         return (t1, t2) -> this.compare(t2, t1);
     }
+    default <U extends Comparable<U>> Comparator<T> thenComparing(Function<T, U> keyExtractor) {
+        Objects.requireNonNull(keyExtractor);
+        Comparator<T> other = comparing(keyExtractor);
+        return this.thenComparing(other);
+    }
 
     default Comparator<T> thenComparing(Comparator<T> other) {
         Objects.requireNonNull(other);
         return (t1, t2) -> {
             int compare = this.compare(t1, t2);
-            if(compare == 0) {
-                return other.compare(t1, t2);
-            }
-            return compare;
+            return compare == 0 ? other.compare(t1, t2) : compare;
         };
     }
 }
