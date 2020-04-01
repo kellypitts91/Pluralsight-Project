@@ -1,4 +1,4 @@
-package pluralsight;
+package pluralsight.video2;
 
 import pluralsight.video2.functions.Predicate;
 

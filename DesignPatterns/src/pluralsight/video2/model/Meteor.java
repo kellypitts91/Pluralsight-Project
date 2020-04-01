@@ -1,4 +1,4 @@
-package pluralsight.model;
+package pluralsight.video2.model;
 
 public class Meteor {
 

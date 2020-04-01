@@ -1,7 +1,7 @@
-package pluralsight;
+package pluralsight.video2;
 
 import pluralsight.video2.functions.Function;
-import pluralsight.model.Meteor;
+import pluralsight.video2.model.Meteor;
 
 public class PlayWithFunctions {
     public static void main(String[] args) {
