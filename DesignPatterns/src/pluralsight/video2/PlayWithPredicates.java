@@ -1,6 +1,6 @@
 package pluralsight;
 
-import pluralsight.functions.Predicate;
+import pluralsight.video2.functions.Predicate;
 
 import java.util.Objects;
 

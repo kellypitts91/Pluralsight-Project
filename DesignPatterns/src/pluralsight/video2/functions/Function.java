@@ -1,4 +1,4 @@
-package pluralsight.functions;
+package pluralsight.video2.functions;
 
 import java.util.Objects;
 

@@ -1,6 +1,6 @@
 package pluralsight;
 
-import pluralsight.functions.Consumer;
+import pluralsight.video2.functions.Consumer;
 
 public class PlayWithConsumers {
     public static void main(String[] args) {

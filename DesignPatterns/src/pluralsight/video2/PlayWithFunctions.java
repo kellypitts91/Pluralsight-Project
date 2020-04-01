@@ -1,6 +1,6 @@
 package pluralsight;
 
-import pluralsight.functions.Function;
+import pluralsight.video2.functions.Function;
 import pluralsight.model.Meteor;
 
 public class PlayWithFunctions {
