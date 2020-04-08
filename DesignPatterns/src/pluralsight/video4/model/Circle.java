@@ -2,16 +2,14 @@ package pluralsight.video4.model;
 
 import java.awt.Color;
 
-public class Circle {
-
-    private Color color;
+public class Circle extends Shape {
 
     public Circle() {
-        this(Color.WHITE);
+        super(Color.WHITE);
     }
 
     public Circle(Color color) {
-        this.color = color;
+        super(color);
     }
 
     @Override
