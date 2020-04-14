@@ -11,39 +11,27 @@ public class PlayWithValidator {
         Person john = new Person("John", 1_000);
         Person linda = new Person(null, 1_000);
 
-        sarah = Validator.validate(p -> p.getName() != null, "The name should not be null")
-                         .thenValidate(p -> p.getAge() > 0, "The age should be greeter than 0")
-                         .thenValidate(p -> p.getAge() < 150, "The age should be less than 150")
-                         .on(sarah)
-                         .validate();
+        sarah = getValidate(sarah);
         System.out.println("Sarah: " + sarah);
 
-        james = Validator.validate(p -> p.getName() != null, "The name should not be null")
-                         .thenValidate(p -> p.getAge() > 0, "The age should be greeter than 0")
-                         .thenValidate(p -> p.getAge() < 150, "The age should be less than 150")
-                         .on(james)
-                         .validate();
+        james = getValidate(james);
         System.out.println("James: " + james);
 
-        mary = Validator.validate(p -> p.getName() != null, "The name should not be null")
-                        .thenValidate(p -> p.getAge() > 0, "The age should be greeter than 0")
-                        .thenValidate(p -> p.getAge() < 150, "The age should be less than 150")
-                        .on(mary)
-                        .validate();
+        mary = getValidate(mary);
         System.out.println("Mary: " + mary);
 
-        john = Validator.validate(p -> p.getName() != null, "The name should not be null")
-                .thenValidate(p -> p.getAge() > 0, "The age should be greeter than 0")
-                .thenValidate(p -> p.getAge() < 150, "The age should be less than 150")
-                .on(john)
-                .validate();
+        john = getValidate(john);
         System.out.println("John: " + john);
 
-        linda = Validator.validate(p -> p.getName() != null, "The name should not be null")
+        linda = getValidate(linda);
+        System.out.println("Linda: " + linda);
+    }
+
+    private static Person getValidate(Person person) {
+        return Validator.validate(p -> p.getName() != null, "The name should not be null")
                 .thenValidate(p -> p.getAge() > 0, "The age should be greeter than 0")
                 .thenValidate(p -> p.getAge() < 150, "The age should be less than 150")
-                .on(linda)
+                .on(person)
                 .validate();
-        System.out.println("Linda: " + linda);
     }
 }
