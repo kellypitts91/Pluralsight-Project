@@ -85,10 +85,6 @@ public class Order {
         return items.add(item);
     }
 
-
-
-
-
     public boolean addWithCheck2(Item item){
         if(item.isAgeRestrictedItem()){
             if(customer.getAge() < getLegalAgeFor(customer)){
@@ -96,10 +92,8 @@ public class Order {
                 return false;
             }
         }
-
         return items.add(item);
     }
-
 
     private int getLegalAgeFor(Customer customer) {
         Country country = customer.getAddress().getCountry();
@@ -109,11 +103,8 @@ public class Order {
             return canada.getLegalDrinkingAge(customer.getAddress().getProvince());
         }
 
-
         return country.getMinimumLegalDrinkingAge();
     }
-
-
 
     public List<Item> getItems() {
         return items;

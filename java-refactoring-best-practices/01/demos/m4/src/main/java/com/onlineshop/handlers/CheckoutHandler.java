@@ -19,6 +19,15 @@ public class CheckoutHandler {
     private DiscountManager discountManager = new DiscountManager();
     private DeliveryManager deliveryManager = new DeliveryManager();
 
+    public double convertToCurrency(double price, String currencyTo) {
+        if(currencyTo.equalsIgnoreCase("EUR")) {
+            return price * 0.9;
+        } else if(currencyTo.equalsIgnoreCase("CAD")) {
+            return price * 1.35;
+        } else {
+            throw new IllegalArgumentException("Unrecognised currency : " + currencyTo);
+        }
+    }
 
     public double calculateTotal(Order order){
 
@@ -31,8 +40,6 @@ public class CheckoutHandler {
         return baseTotal;
     }
 
-
-
     private double sumItemPrices(List<Item> items) {
         double sum = 0;
         for(Item item : items){
@@ -41,7 +48,6 @@ public class CheckoutHandler {
         return sum;
     }
 
-
     public void setDeliveryTimeWindow(LocalDate deliveryStart, LocalDate deliveryEnd){
         this.deliveryWindowStart = deliveryStart;
         this.deliveryWindowEnd = deliveryEnd;
@@ -49,9 +55,7 @@ public class CheckoutHandler {
         System.out.println(format("Your Order will delivered some time between %s and %s",                                                      deliveryWindowStart, deliveryWindowEnd));
     }
 
-
     public void setDeliveryTimeWindow(DeliveryTimeWindow window){
-
         System.out.println(format("Your Order will delivered some time between %s and %s", window.getStart(), window.getEnd()));
     }
 }
