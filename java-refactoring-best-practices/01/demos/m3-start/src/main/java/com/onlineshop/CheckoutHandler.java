@@ -1,6 +1,9 @@
 package com.onlineshop;
 
 
+import com.onlineshop.entities.Customer;
+import com.onlineshop.entities.DeliveryTimeWindow;
+import com.onlineshop.entities.Order;
 import com.onlineshop.items.Item;
 
 import java.math.BigDecimal;
@@ -12,35 +15,41 @@ import java.util.regex.Pattern;
 
 public class CheckoutHandler {
 
-    private LocalDate deliveryWindowStart;
-    private LocalDate deliveryWindowEnd;
+    public double calculateTotal(Order order){
 
-    public double calculateTotal(List<Item> items, String voucher, String membership, String address){
+        double baseTotal = sumItemPrices(order.getItems());
+        baseTotal = applyVoucher(order.getVoucher(), baseTotal);
+        baseTotal = addDeliveryFee(order.getCustomer(), baseTotal);
 
-        double baseTotal = 0;
+        return baseTotal;
+    }
 
-        // sum up the prices
-        List<Double> prices = new ArrayList<>();
+    private double sumItemPrices(List<Item> items) {
+        double sum = 0;
         for(Item item : items){
-            prices.add(item.price());
+            sum += item.price();
         }
+        return sum;
+    }
 
-        for(double price : prices){
-            baseTotal = baseTotal + price;
-        }
-
-        // check if voucher is valid
-        if(voucher.equals("GIMME_DISCOUNT") || voucher.equals("CHEAPER_PLEASE")){
-             baseTotal = BigDecimal.valueOf(baseTotal * 0.95).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+    private double applyVoucher(String voucher, double baseTotal) {
+        if(isVoucherValid(voucher)){
+            baseTotal = BigDecimal.valueOf(baseTotal * 0.95).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
         } else {
             System.out.println("Voucher invalid");
         }
+        return baseTotal;
+    }
 
-        // handle delivery fee
-        if(membership.equalsIgnoreCase("GOLD")){
+    private boolean isVoucherValid(String voucher) {
+        return voucher.equals("GIMME_DISCOUNT") || voucher.equals("CHEAPER_PLEASE");
+    }
+
+    private double addDeliveryFee(Customer customer, double baseTotal) {
+        if(isEligibleForFreeDelivery(customer.getMembership())){
             // do nothing
         } else {
-            if(Pattern.matches(".*US.*", address)){
+            if(isUSAddress(customer.getAddress())){
                 System.out.println("Adding flat delivery fee of 5 USD");
                 baseTotal = baseTotal + 5;
             } else {
@@ -51,13 +60,18 @@ public class CheckoutHandler {
         return baseTotal;
     }
 
+    private boolean isEligibleForFreeDelivery(String membership) {
+        return membership.equalsIgnoreCase("GOLD");
+    }
 
+    private boolean isUSAddress(String address) {
+        return address.contains("US");
+    }
 
-    public void setDeliveryTimeWindow(LocalDate deliveryStart, LocalDate deliveryEnd){
-        this.deliveryWindowStart = deliveryStart;
-        this.deliveryWindowEnd = deliveryEnd;
-
-        System.out.println(String.format("Your Order will delivered some time between %s and %s", deliveryWindowStart, deliveryWindowEnd));
+    public void setDeliveryTimeWindow(DeliveryTimeWindow deliveryTimeWindow){
+        System.out.println(String.format("Your Order will delivered some time between %s and %s",
+                deliveryTimeWindow.getStart(),
+                deliveryTimeWindow.getEnd()));
     }
 
 }
