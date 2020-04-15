@@ -19,16 +19,6 @@ public class CheckoutHandler {
     private DiscountManager discountManager = new DiscountManager();
     private DeliveryManager deliveryManager = new DeliveryManager();
 
-    public double convertToCurrency(double price, String currencyTo) {
-        if(currencyTo.equalsIgnoreCase("EUR")) {
-            return price * 0.9;
-        } else if(currencyTo.equalsIgnoreCase("CAD")) {
-            return price * 1.35;
-        } else {
-            throw new IllegalArgumentException("Unrecognised currency : " + currencyTo);
-        }
-    }
-
     public double calculateTotal(Order order){
 
         double baseTotal = sumItemPrices(order.getItems());
