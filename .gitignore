@@ -2,3 +2,15 @@ DesignPatterns/.idea
 DesignPatterns/out/
 DesignPatterns/DesignPatterns.iml
 *.pdf
+*.zip
+Flask/creating-processing-web-forms-flask/02/demos/
+Flask/creating-processing-web-forms-flask/03/demos/
+Flask/creating-processing-web-forms-flask/04/demos/
+Flask/creating-processing-web-forms-flask/05/demos/
+Flask/falsk-getting-started/venv/
+Flask/WTForms/
+Python-GettingStarted/getting-started-python-core/05/
+Python-GettingStarted/
+*.pyc
+*.xml
+Flask/falsk-getting-started/.idea/

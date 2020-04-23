@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Card View{% endblock %}
+
+{% block content %}
+    <h1>Card has been added to the DB</h1>
+    <p>
+        Question: {{ card.question }} <br>
+        Answer: {{ card.answer }}
+    </p>
+{% endblock %}
