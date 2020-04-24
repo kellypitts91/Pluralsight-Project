@@ -8,9 +8,10 @@ Flask/creating-processing-web-forms-flask/03/demos/
 Flask/creating-processing-web-forms-flask/04/demos/
 Flask/creating-processing-web-forms-flask/05/demos/
 Flask/falsk-getting-started/venv/
-Flask/WTForms/
 Python-GettingStarted/getting-started-python-core/05/
 Python-GettingStarted/
 *.pyc
 *.xml
 Flask/falsk-getting-started/.idea/
+Flask/WTForms/.idea/
+Flask/WTForms/venv/
